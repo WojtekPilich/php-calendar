@@ -11,6 +11,11 @@
 </head>
     <?php
     $startDate = new DateTime('now');
+    if (isset($_POST['minus'])) {
+        $startDate = $startDate->modify('-1 month');
+    } elseif (isset($_POST['plus'])) {
+        $startDate = $startDate->modify('+1 month');
+    }
     $endDate = clone $startDate;
     $currentMonth = $startDate->format('F');
     $currentYear = $startDate->format('Y');
@@ -56,6 +61,22 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <br>
+            <form action="" method="post">
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="check1">
+                        <button type="checkbox" class="btn btn-warning btn-sm" id="minus" name="minus" value="-1 month">-1 month</button>
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <button type="submit" class="btn btn-info">Current Month</button>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="check2">
+                        <button type="checkbox" class="btn btn-warning btn-sm" id="plus" name="plus" value="+1 month">+1 month</button>
+                    </label>
+                </div>
+            </form>
         </div>
     </div>
 </body>
