@@ -10,8 +10,8 @@
     <title>Calendar</title>
 </head>
     <?php
-    $startDate = new DateTime('2019-08-01');
-    $endDate = new DateTime('2019-08-31');
+    $startDate = new DateTime('now');
+    $endDate = clone $startDate;
     $currentMonth = $startDate->format('F');
     $currentYear = $startDate->format('Y');
 
@@ -28,36 +28,34 @@
     ?>
 <body class="bg-secondary">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center center-block">
-                <br><br><br><br>
-                <h1 class="text-warning"><?php echo $currentMonth . ' ' . $currentYear ?></h1><br>
-                <table class="table table-striped table-fixed table-dark table-bordered">
-                    <thead class="bg-info">
-                    <tr>
-                        <th scope="col">MON</th>
-                        <th scope="col">TUE</th>
-                        <th scope="col">WED</th>
-                        <th scope="col">THU</th>
-                        <th scope="col">FRI</th>
-                        <th scope="col">SAT</th>
-                        <th scope="col">SUN</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($weekPeriods as $firstMondayOfWeek): ?>
-                            <tr>
-                                <?php $days = new DatePeriod($firstMondayOfWeek, $dailyInterval, 6 ); ?>
-                                <?php foreach ($days as $day): ?>
-                                    <td <?= $day->format('F') !== $currentMonth ? "class='bg-secondary'" : ''?>>
-                                        <?= $day->format('d'); ?>
-                                    </td>
-                                <?php endforeach; ?>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+        <div class="col-md-6 mx-auto text-center center-block">
+            <br><br><br><br>
+            <h1 class="text-warning"><?php echo $currentMonth . ' ' . $currentYear ?></h1><br>
+            <table class="table table-striped table-fixed table-dark table-bordered">
+                <thead class="bg-info">
+                <tr>
+                    <th scope="col">MON</th>
+                    <th scope="col">TUE</th>
+                    <th scope="col">WED</th>
+                    <th scope="col">THU</th>
+                    <th scope="col">FRI</th>
+                    <th scope="col">SAT</th>
+                    <th scope="col">SUN</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($weekPeriods as $firstMondayOfWeek): ?>
+                        <tr>
+                            <?php $days = new DatePeriod($firstMondayOfWeek, $dailyInterval, 6 ); ?>
+                            <?php foreach ($days as $day): ?>
+                                <td <?= $day->format('F') !== $currentMonth ? "class='bg-secondary'" : ''?>>
+                                    <?= $day->format('d'); ?>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
